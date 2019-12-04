@@ -1,0 +1,383 @@
+{
+  "type": "object",
+  "required": [
+    "errorCode",
+    "errorMessage",
+    "resultData"
+  ],
+  "properties": {
+    "errorCode": {
+      "type": "integer"
+    },
+    "errorMessage": {
+      "type": "null"
+    },
+    "resultData": {
+      "type": "object",
+      "required": [
+        "model",
+        "goods"
+      ],
+      "properties": {
+        "model": {
+          "type": "object",
+          "required": [
+            "name",
+            "code",
+            "producer",
+            "marketingLabel",
+            "modelType",
+            "categoryCodes",
+            "description",
+            "sortOrder"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            },
+            "producer": {
+              "type": "object",
+              "required": [
+                "name",
+                "code",
+                "categoryCodes"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "categoryCodes": {
+                  "type": "array"
+                }
+              }
+            },
+            "marketingLabel": {
+              "type": "null"
+            },
+            "modelType": {
+              "type": "object",
+              "required": [
+                "name",
+                "code"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            },
+            "categoryCodes": {
+              "type": "array"
+            },
+            "description": {
+              "type": "string"
+            },
+            "sortOrder": {
+              "type": "integer"
+            }
+          }
+        },
+        "goods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "onSale",
+              "modifyTime",
+              "sortOrder",
+              "code",
+              "name",
+              "color",
+              "params",
+              "description",
+              "shortDescription",
+              "price",
+              "features",
+              "leasingInfo",
+              "additionalServices",
+              "images",
+              "contentLabel",
+              "marketingCodes",
+              "similarGoods"
+            ],
+            "properties": {
+              "onSale": {
+                "type": "boolean"
+              },
+              "modifyTime": {
+                "type": "string"
+              },
+              "sortOrder": {
+                "type": "integer"
+              },
+              "code": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "color": {
+                "type": "object",
+                "required": [
+                  "colorCode",
+                  "colorName"
+                ],
+                "properties": {
+                  "colorCode": {
+                    "type": "string"
+                  },
+                  "colorName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "type",
+                    "value"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "description": {
+                "type": "null"
+              },
+              "shortDescription": {
+                "type": "null"
+              },
+              "price": {
+                "type": "number"
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "title",
+                    "content",
+                    "imgUrl",
+                    "actionUrl",
+                    "type"
+                  ],
+                  "properties": {
+                    "title": {
+                      "type": "null"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "imgUrl": {
+                      "type": "string"
+                    },
+                    "actionUrl": {
+                      "type": "null"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "leasingInfo": {
+                "type": "object",
+                "required": [
+                  "financialType",
+                  "code",
+                  "leasingSum",
+                  "monthPay",
+                  "monthTerm",
+                  "residualSum",
+                  "earlyUpgradeTerm",
+                  "freeUpgradeTerm",
+                  "prolongationTerm",
+                  "hasUpgrade",
+                  "upgradePayment"
+                ],
+                "properties": {
+                  "financialType": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "leasingSum": {
+                    "type": "number"
+                  },
+                  "monthPay": {
+                    "type": "number"
+                  },
+                  "monthTerm": {
+                    "type": "integer"
+                  },
+                  "residualSum": {
+                    "type": "number"
+                  },
+                  "earlyUpgradeTerm": {
+                    "type": "integer"
+                  },
+                  "freeUpgradeTerm": {
+                    "type": "integer"
+                  },
+                  "prolongationTerm": {
+                    "type": "integer"
+                  },
+                  "hasUpgrade": {
+                    "type": "boolean"
+                  },
+                  "upgradePayment": {
+                    "type": "number"
+                  }
+                }
+              },
+              "additionalServices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "obligatory",
+                    "price",
+                    "code",
+                    "name"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "obligatory": {
+                      "type": "boolean"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "sortOrder",
+                    "imgUrl",
+                    "thumbUrl"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "sortOrder": {
+                      "type": "integer"
+                    },
+                    "imgUrl": {
+                      "type": "string"
+                    },
+                    "thumbUrl": {
+                      "type": "null"
+                    }
+                  }
+                }
+              },
+              "contentLabel": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "required": [
+                  "code",
+                  "imgUrl",
+                  "title",
+                  "content"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "imgUrl": {
+                    "type": "null"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              },
+              "marketingCodes": {
+                "type": "null"
+              },
+              "similarGoods": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "param"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "param": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "type",
+                          "value"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

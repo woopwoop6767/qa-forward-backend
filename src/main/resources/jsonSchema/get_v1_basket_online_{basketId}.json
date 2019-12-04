@@ -1,0 +1,194 @@
+{
+  "type": "object",
+  "required": [
+    "errorCode",
+    "errorMessage",
+    "resultData"
+  ],
+  "properties": {
+    "errorCode": {
+      "type": "integer"
+    },
+    "errorMessage": {
+      "type": "null"
+    },
+    "resultData": {
+      "type": "object",
+      "required": [
+        "basketInfo"
+      ],
+      "properties": {
+        "basketInfo": {
+          "type": "object",
+          "required": [
+            "agentId",
+            "basketId",
+            "channel",
+            "employeeId",
+            "expirationDate",
+            "goods",
+            "lang",
+            "orderId",
+            "partnerId",
+            "referenceId",
+            "status",
+            "storeId",
+            "totalLeasingSum",
+            "totalMonthPay",
+            "totalPrice",
+            "type",
+            "usid"
+          ],
+          "properties": {
+            "agentId": {
+              "type": "string"
+            },
+            "basketId": {
+              "type": "string"
+            },
+            "channel": {
+              "type": "string"
+            },
+            "employeeId": {
+              "type": "null"
+            },
+            "expirationDate": {
+              "type": "string"
+            },
+            "goods": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "count",
+                  "goodCode",
+                  "goodName",
+                  "goodType",
+                  "leasingInfo",
+                  "obligatory",
+                  "partnerGoodName",
+                  "partnerSKU",
+                  "price",
+                  "tradeInIfo"
+                ],
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "goodCode": {
+                    "type": "string"
+                  },
+                  "goodName": {
+                    "type": "string"
+                  },
+                  "goodType": {
+                    "type": "string"
+                  },
+                  "leasingInfo": {
+                    "type": "object",
+                    "required": [
+                      "earlyUpgradeTerm",
+                      "financialType",
+                      "freeUpgradeTerm",
+                      "leasingSum",
+                      "monthPay",
+                      "monthTerm",
+                      "productCode",
+                      "productName",
+                      "prolongationTerm",
+                      "residualSum",
+                      "upgradePayment"
+                    ],
+                    "properties": {
+                      "earlyUpgradeTerm": {
+                        "type": "integer"
+                      },
+                      "financialType": {
+                        "type": "string"
+                      },
+                      "freeUpgradeTerm": {
+                        "type": "integer"
+                      },
+                      "leasingSum": {
+                        "type": "number"
+                      },
+                      "monthPay": {
+                        "type": "number"
+                      },
+                      "monthTerm": {
+                        "type": "integer"
+                      },
+                      "productCode": {
+                        "type": "string"
+                      },
+                      "productName": {
+                        "type": "string"
+                      },
+                      "prolongationTerm": {
+                        "type": "integer"
+                      },
+                      "residualSum": {
+                        "type": "number"
+                      },
+                      "upgradePayment": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "obligatory": {
+                    "type": "boolean"
+                  },
+                  "partnerGoodName": {
+                    "type": "null"
+                  },
+                  "partnerSKU": {
+                    "type": "null"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "tradeInIfo": {
+                    "type": "null"
+                  }
+                }
+              }
+            },
+            "lang": {
+              "type": "string"
+            },
+            "orderId": {
+              "type": "null"
+            },
+            "partnerId": {
+              "type": "null"
+            },
+            "referenceId": {
+              "type": "null"
+            },
+            "status": {
+              "type": "string"
+            },
+            "storeId": {
+              "type": "null"
+            },
+            "totalLeasingSum": {
+              "type": "number"
+            },
+            "totalMonthPay": {
+              "type": "number"
+            },
+            "totalPrice": {
+              "type": "number"
+            },
+            "type": {
+              "type": "string"
+            },
+            "usid": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

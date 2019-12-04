@@ -1,0 +1,314 @@
+{
+  "type": "object",
+  "required": [
+    "errorCode",
+    "errorMessage",
+    "resultData"
+  ],
+  "properties": {
+    "errorCode": {
+      "type": "integer"
+    },
+    "errorMessage": {
+      "type": "null"
+    },
+    "resultData": {
+      "type": "object",
+      "required": [
+        "applicationInfo"
+      ],
+      "properties": {
+        "applicationInfo": {
+          "type": "object",
+          "required": [
+            "agentId",
+            "applicationID",
+            "clientImages",
+            "clientPersonalData",
+            "clientPersonalDataMasked",
+            "createDate",
+            "email",
+            "expirationDate",
+            "hardCheckCode",
+            "hardCheckText",
+            "hasPassportImage",
+            "hasPersonalDataExist",
+            "hasSelfieImage",
+            "mobilePhoneMasked",
+            "partnerId",
+            "passportSelfieStatus",
+            "previousApplicationId",
+            "productInfo",
+            "status",
+            "type"
+          ],
+          "properties": {
+            "agentId": {
+              "type": "string"
+            },
+            "applicationID": {
+              "type": "string"
+            },
+            "clientImages": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "imageType",
+                  "imageUrl"
+                ],
+                "properties": {
+                  "imageType": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "clientPersonalData": {
+              "type": "object",
+              "required": [
+                "birthDate",
+                "birthPlace",
+                "documentType",
+                "firstName",
+                "hasMiddleName",
+                "ident",
+                "issueDate",
+                "issuer",
+                "issuerCode",
+                "lastName",
+                "middleName",
+                "occupation",
+                "registrationAddressJson",
+                "salary",
+                "sex"
+              ],
+              "properties": {
+                "birthDate": {
+                  "type": "string"
+                },
+                "birthPlace": {
+                  "type": "string"
+                },
+                "documentType": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "hasMiddleName": {
+                  "type": "boolean"
+                },
+                "ident": {
+                  "type": "string"
+                },
+                "issueDate": {
+                  "type": "string"
+                },
+                "issuer": {
+                  "type": "string"
+                },
+                "issuerCode": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "middleName": {
+                  "type": "string"
+                },
+                "occupation": {
+                  "type": "string"
+                },
+                "registrationAddressJson": {
+                  "type": "string"
+                },
+                "salary": {
+                  "type": "integer"
+                },
+                "sex": {
+                  "type": "string"
+                }
+              }
+            },
+            "clientPersonalDataMasked": {
+              "type": "object",
+              "required": [
+                "birthDateMasked",
+                "birthPlaceMasked",
+                "email",
+                "firstName",
+                "hasPassportImage",
+                "identMasked",
+                "issueDateMasked",
+                "issuerCodeMasked",
+                "issuerMasked",
+                "lastNameMasked",
+                "mobilePhoneMasked",
+                "occupation",
+                "patronymicNameMasked",
+                "registrationAddressMasked",
+                "sex"
+              ],
+              "properties": {
+                "birthDateMasked": {
+                  "type": "string"
+                },
+                "birthPlaceMasked": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "hasPassportImage": {
+                  "type": "boolean"
+                },
+                "identMasked": {
+                  "type": "string"
+                },
+                "issueDateMasked": {
+                  "type": "string"
+                },
+                "issuerCodeMasked": {
+                  "type": "string"
+                },
+                "issuerMasked": {
+                  "type": "string"
+                },
+                "lastNameMasked": {
+                  "type": "string"
+                },
+                "mobilePhoneMasked": {
+                  "type": "string"
+                },
+                "occupation": {
+                  "type": "string"
+                },
+                "patronymicNameMasked": {
+                  "type": "string"
+                },
+                "registrationAddressMasked": {
+                  "type": "string"
+                },
+                "sex": {
+                  "type": "string"
+                }
+              }
+            },
+            "createDate": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "expirationDate": {
+              "type": "string"
+            },
+            "hardCheckCode": {
+              "type": "string"
+            },
+            "hardCheckText": {
+              "type": "null"
+            },
+            "hasPassportImage": {
+              "type": "boolean"
+            },
+            "hasPersonalDataExist": {
+              "type": "boolean"
+            },
+            "hasSelfieImage": {
+              "type": "boolean"
+            },
+            "mobilePhoneMasked": {
+              "type": "string"
+            },
+            "partnerId": {
+              "type": "null"
+            },
+            "passportSelfieStatus": {
+              "type": "string"
+            },
+            "previousApplicationId": {
+              "type": "null"
+            },
+            "productInfo": {
+              "type": "object",
+              "required": [
+                "earlyUpgradeTerm",
+                "financialType",
+                "freeUpgradeTerm",
+                "goodCode",
+                "goodName",
+                "goodPrice",
+                "leasingSum",
+                "monthPay",
+                "monthTerm",
+                "productCode",
+                "productName",
+                "prolongationTerm",
+                "residualValue",
+                "upgradePayment"
+              ],
+              "properties": {
+                "earlyUpgradeTerm": {
+                  "type": "integer"
+                },
+                "financialType": {
+                  "type": "string"
+                },
+                "freeUpgradeTerm": {
+                  "type": "integer"
+                },
+                "goodCode": {
+                  "type": "string"
+                },
+                "goodName": {
+                  "type": "string"
+                },
+                "goodPrice": {
+                  "type": "number"
+                },
+                "leasingSum": {
+                  "type": "number"
+                },
+                "monthPay": {
+                  "type": "number"
+                },
+                "monthTerm": {
+                  "type": "number"
+                },
+                "productCode": {
+                  "type": "string"
+                },
+                "productName": {
+                  "type": "string"
+                },
+                "prolongationTerm": {
+                  "type": "number"
+                },
+                "residualValue": {
+                  "type": "number"
+                },
+                "upgradePayment": {
+                  "type": "number"
+                }
+              }
+            },
+            "status": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
