@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "required": [
+    "errorCode",
+    "errorMessage",
+    "resultData"
+  ],
+  "properties": {
+    "errorCode": {
+      "type": "integer"
+    },
+    "errorMessage": {
+      "type": "null"
+    },
+    "resultData": {
+      "type": "object",
+      "required": [
+        "resultCode",
+        "token",
+        "_links"
+      ],
+      "properties": {
+        "resultCode": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "_links": {
+          "type": "object",
+          "required": [
+            "cancel",
+            "upload-selfie-or-passport"
+          ],
+          "properties": {
+            "cancel": {
+              "type": "object",
+              "required": [
+                "href"
+              ],
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              }
+            },
+            "upload-selfie-or-passport": {
+              "type": "object",
+              "required": [
+                "href"
+              ],
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
