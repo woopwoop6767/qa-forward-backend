@@ -6,25 +6,34 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.hamcrest.Matchers;
 
-public interface Specification {
+public interface Specification extends GetEnv {
 
-    default ResponseSpecification checkStatusCodeAndContentType() {
-        return new ResponseSpecBuilder()
-                .expectStatusCode(200)
-                .expectContentType(ContentType.JSON)
+    default RequestSpecification getRequestSpecification(String path) {
+        return new RequestSpecBuilder()
+                .addFilter(new AllureRestAssured())
+                .setContentType(ContentType.JSON)
+                .setBaseUri(getEnv("baseUriDev"))
+                .setBasePath(path)
+                .addHeader("device-type", "WEB")
                 .build()
                 ;
     }
 
-    default RequestSpecification getRequestSpecification(String basePath) {
-        return new RequestSpecBuilder()
-                .addFilter(new AllureRestAssured())
-                .setBaseUri("https://subscribe-rf-front-test.xn--d1aiavecq8cxb.xn--p1ai/")
-                .setBasePath(basePath)
-                .addHeader("Device-Type", "WEB")
-                .setContentType(ContentType.JSON)
-                .build()
-                ;
+    default ResponseSpecification getResponseSpecification(Boolean isNegative) {
+        if (isNegative) {
+            return new ResponseSpecBuilder()
+                    .expectStatusCode(Matchers.oneOf(400, 404, 500))
+                    .expectContentType(ContentType.JSON)
+                    .build()
+                    ;
+        } else {
+            return new ResponseSpecBuilder()
+                    .expectStatusCode(200)
+                    .expectContentType(ContentType.JSON)
+                    .build()
+                    ;
+        }
     }
 }
