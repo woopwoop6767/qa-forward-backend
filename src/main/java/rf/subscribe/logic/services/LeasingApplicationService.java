@@ -1,103 +1,78 @@
 package rf.subscribe.logic.services;
 
 import io.qameta.allure.Step;
-import org.apache.commons.lang3.RandomStringUtils;
+import rf.subscribe.logic.BodyForTest;
 import rf.subscribe.logic.api.Specification;
-import rf.subscribe.logic.pojo.leasingApplication.postLeasingApplication.LeasingApplicationResponse;
-import rf.subscribe.logic.pojo.leasingApplication.postLeasingApplicationApplicationIdCheckConsentsOtp.CheckConsentsOtpResponse;
-import rf.subscribe.logic.pojo.leasingApplication.postLeasingApplicationApplicationClientData.ClientDataResponse;
+import rf.subscribe.logic.pojo.leasingApplication.invalid.LeasingApplicationEmptyEmailOrPhoneResponse.LeasingApplicationNoValidResponse;
+import rf.subscribe.logic.pojo.leasingApplication.invalid.postLeasingAppClientDataWithoutPassportAndSelfie.ClientDataInvalidStatus500Response;
+import rf.subscribe.logic.pojo.leasingApplication.valid.postLeasingApplication.LeasingApplicationResponse;
+import rf.subscribe.logic.pojo.leasingApplication.valid.postLeasingApplicationApplicationClientData.ClientDataResponse;
+import rf.subscribe.logic.pojo.leasingApplication.valid.postLeasingApplicationApplicationIdCheckConsentsOtp.CheckConsentsOtpResponse;
 
 import java.io.File;
-import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 
-public class LeasingApplicationService implements Specification {
+public class LeasingApplicationService extends BodyForTest implements Specification {
 
-    private String mobileCode = "1111";
+    private LeasingApplicationResponse leasingApplicationResponse;
+    private CheckConsentsOtpResponse checkConsentsOtpResponse;
 
-    private HashMap getBodyForApplicationId(String basketId, String typeApplication) {
-        return new HashMap() {{
-            put("agreementSimpleSign", "true");
-            put("basketId", basketId);
-            put("email", RandomStringUtils.randomAlphabetic(10).concat("@test.test"));
-            put("mobilePhone", "9".concat(RandomStringUtils.randomNumeric(9)));
-            put("previousApplicationId", null);
-            put("type", typeApplication);
-        }};
+    private LeasingApplicationResponse postLeasingApplicationValid(String basketId, String typeApplication, String email, String mobilePhone) {
+        if (leasingApplicationResponse == null) {
+            leasingApplicationResponse = given()
+                    .spec(getRequestSpecification("/application/v2/leasing-application/"))
+                    .body(getBodyForApplicationId(basketId, typeApplication, email, mobilePhone))
+                    .post()
+                    .then()
+                    .spec(getResponseSpecification(false))
+                    .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/valid/post_v2_leasing_application.json")))
+                    .extract().body().as(LeasingApplicationResponse.class)
+            ;
+        }
+        return leasingApplicationResponse;
     }
 
-    private HashMap getBodyForAuthToken() {
-        return new HashMap() {{
-            put("otp", mobileCode);
-        }};
-    }
-
-    private HashMap getBodyForClientData() {
-        return new HashMap() {{
-            put("clientInfo", new HashMap() {{
-                put("birthDate", "1972-07-23");
-                put("birthPlace", "С. ФРОНТОВКА ОРАТОВСКОГО Р-НА ВИННИЦКОЙ ОБЛ.");
-                put("documentType", "PASSPORT");
-                put("firstName", "СЕРГЕЙ");
-                put("hasMiddleName", true);
-                put("issueDate", "2015-12-18");
-                put("issuer", "ОТДЕЛ УФМС РОССИИ ПО РЕСПУБЛИКЕ КРЫМ В КИЕВСКОМ РАЙОНЕ Г. СИМФЕРОПОЛЯ");
-                put("issuerCode", "910-003");
-                put("lastName", "ЗДРИЛЮК");
-                put("patronymicName", "АНАТОЛЬЕВИЧ");
-                put("registrationAddress", new HashMap() {{
-                    put("blockNum", null);
-                    put("buildingNum", null);
-                    put("district", null);
-                    put("districtCode", "000");
-                    put("flatNum", "3");
-                    put("locality", "Авиационный");
-                    put("localityCode", "000");
-                    put("localityType", null);
-                    put("region", "Московская");
-                    put("regionCode", "50");
-                    put("street", "Королева");
-                    put("streetCode", "0784");
-                    put("streetNum", "10");
-                    put("taxCode", "142007");
-                    put("town", "Домодедово");
-                    put("townCode", "001");
-                }});
-                put("sex", "MALE");
-            }});
-            put("monthlySalary", "70000");
-            put("occupation", "COMMERCIAL_EMPLOYEE");
-        }};
-    }
-
-    @Step("I post request leasing-application ")
-    public LeasingApplicationResponse postLeasingApplication(String basketId, String typeApplication) {
+    @Step("I post request leasing-application with empty email ")
+    public LeasingApplicationNoValidResponse postLeasingApplicationEmptyEmail(String basketId, String typeApplication, String email, String mobilePhone) {
         return given()
                 .spec(getRequestSpecification("/application/v2/leasing-application/"))
-                .header("device-type", "WEB")
-                .body(getBodyForApplicationId(basketId, typeApplication))
+                .body(getBodyForApplicationId(basketId, typeApplication, email, mobilePhone))
                 .post()
                 .then()
-                .spec(getResponseSpecification(false))
-                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/post_v2_leasing_application.json")))
-                .extract().body().as(LeasingApplicationResponse.class)
+                .spec(getResponseSpecification(true))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/invalid/post_v2_leasing_application_empty_email_and_phone.json")))
+                .extract().body().as(LeasingApplicationNoValidResponse.class)
                 ;
     }
 
-    @Step("I post leasing application check consents Otp")
-    public CheckConsentsOtpResponse postLeasingAppCheckConsentsOtp(String applicationId) {
+    @Step("I post request leasing-application with empty phone")
+    public LeasingApplicationNoValidResponse postLeasingApplicationEmptyPhone(String basketId, String typeApplication, String email, String mobilePhone) {
         return given()
-                .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/check-consents-otp")))
-                .header("device-type", "WEB")
-                .body(getBodyForAuthToken())
+                .spec(getRequestSpecification("/application/v2/leasing-application/"))
+                .body(getBodyForApplicationId(basketId, typeApplication, email, mobilePhone))
                 .post()
                 .then()
-                .spec(getResponseSpecification(false))
-                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/post_application_v2_leasing_application_{applicationID}_check_consents_otp.json")))
-                .extract().body().as(CheckConsentsOtpResponse.class)
+                .spec(getResponseSpecification(true))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/invalid/post_v2_leasing_application_empty_email_and_phone.json")))
+                .extract().body().as(LeasingApplicationNoValidResponse.class)
                 ;
+    }
+
+    private CheckConsentsOtpResponse postLeasingAppCheckConsentsOtp(String applicationId, String mobileCode) {
+        if (checkConsentsOtpResponse == null) {
+            checkConsentsOtpResponse = given()
+                    .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/check-consents-otp")))
+                    .body(getBodyForAuthToken(mobileCode))
+                    .post()
+                    .then()
+                    .spec(getResponseSpecification(false))
+                    .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/valid/post_application_v2_leasing_application_{applicationID}_check_consents_otp.json")))
+                    .extract().body().as(CheckConsentsOtpResponse.class)
+            ;
+        }
+        return checkConsentsOtpResponse;
     }
 
     @Step("I post leasing application client data")
@@ -109,9 +84,38 @@ public class LeasingApplicationService implements Specification {
                 .post()
                 .then()
                 .spec(getResponseSpecification(false))
-                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/post_application_v2_leasing_application_{applicationID}_client_data.json")))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/valid/post_application_v2_leasing_application_{applicationID}_client_data.json")))
                 .extract().body().as(ClientDataResponse.class)
                 ;
     }
 
+    @Step("I post leasing application client data without passport and selfie")
+    public ClientDataInvalidStatus500Response postLeasingAppClientDataWithoutPassportAndSelfie(String applicationId, String authToken) {
+        return given()
+                .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/client-data")))
+                .header("authorization", "Bearer " + authToken)
+                .body(getBodyForClientData())
+                .post()
+                .then()
+                .spec(getResponseSpecification(true))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/invalid/post_application_v2_leasing_application_{applicationID}_client_data_without_passport_and_selfie.json")))
+                .extract().body().as(ClientDataInvalidStatus500Response.class)
+                ;
+    }
+
+    @Step("I get application ID")
+    public String getApplicationId(String basketId, String typeApplication, String email, String mobilePhone) {
+        return postLeasingApplicationValid(basketId, typeApplication, email, mobilePhone)
+                .getResultData()
+                .getApplicationID()
+                ;
+    }
+
+    @Step("I get authorization token")
+    public String getAuthToken(String applicationId, String mobileCode) {
+        return postLeasingAppCheckConsentsOtp(applicationId, mobileCode)
+                .getResultData()
+                .getToken()
+                ;
+    }
 }
