@@ -75,6 +75,49 @@ public class LeasingApplicationService extends BodyForTest implements Specificat
         return checkConsentsOtpResponse;
     }
 
+    @Step("I post leasing application check consents otp with invalid mobile code")
+    public CheckConsentsOtpResponse postLeasingAppCheckConsentsOtpWithInvalidMobileCode(String applicationId, String mobileCode) {
+        checkConsentsOtpResponse = given()
+                .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/check-consents-otp")))
+                .header("device-type", "WEB")
+                .body(getBodyForAuthToken(mobileCode))
+                .post()
+                .then()
+                .spec(getResponseSpecification(false))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/invalid/post_application_v2_leasing_application_{applicationID}_check_consents_otp.json")))
+                .extract().body().as(CheckConsentsOtpResponse.class)
+                ;
+        return checkConsentsOtpResponse;
+    }
+
+    @Step("I post leasing application check consents otp with invalid auth token and reject order")
+    public CheckConsentsOtpResponse postLeasingAppCheckConsentsOtpWithInvalidTokenWithRejectOrder(String applicationId, String mobileCode) {
+        checkConsentsOtpResponse = given()
+                .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/check-consents-otp")))
+                .header("device-type", "WEB")
+                .body(getBodyForAuthToken(mobileCode))
+                .post()
+                .then()
+                .spec(getResponseSpecification(true))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/invalid/post_application_v2_leasing_application_{applicationID}_check_consents_otp-rejection.json")))
+                .extract().body().as(CheckConsentsOtpResponse.class)
+                ;
+        return checkConsentsOtpResponse;
+    }
+
+    @Step("I get leasing application short check with reject order info")
+    public LeasingApplicationResponse getLeasingAppShortCheckWithRejectOrderInfo(String applicationId) {
+        return given()
+                .spec(getRequestSpecification("/application/v2/leasing-application/".concat(applicationId).concat("/leasing-application-short")))
+                .header("device-type", "WEB")
+                .get()
+                .then()
+                .spec(getResponseSpecification(false))
+                .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/valid/get_application_v2_leasing_application_{applicationID}_leasing_application_short-rejection.json")))
+                .extract().body().as(LeasingApplicationResponse.class)
+                ;
+    }
+
     @Step("I post leasing application client data")
     public ClientDataResponse postLeasingAppClientData(String applicationId, String authToken) {
         return given()

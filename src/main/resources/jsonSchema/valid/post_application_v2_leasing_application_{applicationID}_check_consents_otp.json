@@ -25,37 +25,6 @@
         },
         "token": {
           "type": "string"
-        },
-        "_links": {
-          "type": "object",
-          "required": [
-            "cancel",
-            "upload-selfie-or-passport"
-          ],
-          "properties": {
-            "cancel": {
-              "type": "object",
-              "required": [
-                "href"
-              ],
-              "properties": {
-                "href": {
-                  "type": "string"
-                }
-              }
-            },
-            "upload-selfie-or-passport": {
-              "type": "object",
-              "required": [
-                "href"
-              ],
-              "properties": {
-                "href": {
-                  "type": "string"
-                }
-              }
-            }
-          }
         }
       }
     }

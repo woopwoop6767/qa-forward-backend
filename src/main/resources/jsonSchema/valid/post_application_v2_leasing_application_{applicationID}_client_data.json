@@ -44,10 +44,18 @@
           ],
           "properties": {
             "agentId": {
-              "type": "string"
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             },
             "applicationID": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "clientImages": {
               "type": "array",
@@ -94,7 +102,11 @@
                   "type": "string"
                 },
                 "documentType": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "RUS_PASSPORT_NATIONAL",
+                    "KAZ_ID"
+                  ]
                 },
                 "firstName": {
                   "type": "string"
@@ -118,7 +130,14 @@
                   "type": "string"
                 },
                 "middleName": {
-                  "type": "string"
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
                 },
                 "occupation": {
                   "type": "string"
@@ -127,10 +146,16 @@
                   "type": "string"
                 },
                 "salary": {
-                  "type": "integer"
+                  "type": "integer",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "sex": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "FEMALE",
+                    "MALE"
+                  ]
                 }
               }
             },
@@ -197,7 +222,11 @@
                   "type": "string"
                 },
                 "sex": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "FEMALE",
+                    "MALE"
+                  ]
                 }
               }
             },
@@ -214,7 +243,14 @@
               "type": "string"
             },
             "hardCheckText": {
-              "type": "null"
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             },
             "hasPassportImage": {
               "type": "boolean"
@@ -229,13 +265,34 @@
               "type": "string"
             },
             "partnerId": {
-              "type": "null"
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             },
             "passportSelfieStatus": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "CHECK_OFF",
+                "NOT_CHECKED",
+                "PENDING",
+                "REJECTED",
+                "CHECKED_SUCCESS"
+              ]
             },
             "previousApplicationId": {
-              "type": "null"
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             },
             "productInfo": {
               "type": "object",
@@ -257,13 +314,22 @@
               ],
               "properties": {
                 "earlyUpgradeTerm": {
-                  "type": "integer"
+                  "type": "integer",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "financialType": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "XBOX_LEASING_PROGRAM_DELIVERY",
+                    "APPLE_PHONE_LEASING_PROGRAM",
+                    "SAMSUNG_PHONE_LEASING_PROGRAM"
+                  ]
                 },
                 "freeUpgradeTerm": {
-                  "type": "integer"
+                  "type": "integer",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "goodCode": {
                   "type": "string"
@@ -272,16 +338,24 @@
                   "type": "string"
                 },
                 "goodPrice": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "leasingSum": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "monthPay": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "monthTerm": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "productCode": {
                   "type": "string"
@@ -290,10 +364,14 @@
                   "type": "string"
                 },
                 "prolongationTerm": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "residualValue": {
-                  "type": "number"
+                  "type": "number",
+                  "exclusiveMinimum": true,
+                  "minimum": 0
                 },
                 "upgradePayment": {
                   "type": "number"
@@ -301,10 +379,27 @@
               }
             },
             "status": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "DRAFT",
+                "NEW",
+                "CONFIRMED",
+                "IN_REVIEW",
+                "REJECTED",
+                "APPROVED",
+                "CANCEL",
+                "CONTRACT_CREATED",
+                "ERROR",
+                "DATA_SAVED",
+                "PENDING"
+              ]
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "NEW",
+                "UPGRADE"
+              ]
             }
           }
         }
