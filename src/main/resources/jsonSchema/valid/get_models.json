@@ -148,7 +148,8 @@
                           ],
                           "properties": {
                             "colorCode": {
-                              "type": "string"
+                              "type": "string",
+                              "pattern": "^(#)"
                             },
                             "colorName": {
                               "type": "string"
@@ -178,31 +179,50 @@
                           ],
                           "properties": {
                             "financialType": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "XBOX_LEASING_PROGRAM_DELIVERY",
+                                "APPLE_PHONE_LEASING_PROGRAM",
+                                "SAMSUNG_PHONE_LEASING_PROGRAM"
+                              ]
                             },
                             "code": {
                               "type": "string"
                             },
                             "leasingSum": {
-                              "type": "number"
+                              "type": "number",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "monthPay": {
-                              "type": "number"
+                              "type": "number",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "monthTerm": {
-                              "type": "integer"
+                              "type": "integer",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "residualSum": {
-                              "type": "number"
+                              "type": "number",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "earlyUpgradeTerm": {
-                              "type": "integer"
+                              "type": "integer",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "freeUpgradeTerm": {
-                              "type": "integer"
+                              "type": "integer",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "prolongationTerm": {
-                              "type": "integer"
+                              "type": "integer",
+                              "exclusiveMinimum": true,
+                              "minimum": 0
                             },
                             "hasUpgrade": {
                               "type": "boolean"
@@ -224,13 +244,18 @@
                             ],
                             "properties": {
                               "type": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                  "PRIMARY",
+                                  "COMMON"
+                                ]
                               },
                               "sortOrder": {
                                 "type": "integer"
                               },
                               "imgUrl": {
-                                "type": "string"
+                                "type": "string",
+                                "pattern": "^(https://)"
                               },
                               "thumbUrl": {
                                 "type": "null"
