@@ -243,6 +243,7 @@
                   "financialType": {
                     "type": "string",
                     "enum": [
+                      "XBOX_LOAN_PROGRAM_DELIVERY",
                       "XBOX_LEASING_PROGRAM_DELIVERY",
                       "APPLE_PHONE_LEASING_PROGRAM",
                       "SAMSUNG_PHONE_LEASING_PROGRAM"
@@ -268,7 +269,7 @@
                   },
                   "residualSum": {
                     "type": "number",
-                    "exclusiveMinimum": true,
+                    "exclusiveMinimum": false,
                     "minimum": 0
                   },
                   "earlyUpgradeTerm": {
@@ -283,7 +284,7 @@
                   },
                   "prolongationTerm": {
                     "type": "integer",
-                    "exclusiveMinimum": true,
+                    "exclusiveMinimum": false,
                     "minimum": 0
                   },
                   "hasUpgrade": {

@@ -131,6 +131,7 @@
                       "financialType": {
                         "type": "string",
                         "enum": [
+                          "XBOX_LOAN_PROGRAM_DELIVERY",
                           "PARTNER_SERVICE",
                           "SERVICE_PROGRAM",
                           "ACCESSORY",
@@ -169,12 +170,12 @@
                       },
                       "prolongationTerm": {
                         "type": "integer",
-                        "exclusiveMinimum": true,
+                        "exclusiveMinimum": false,
                         "minimum": 0
                       },
                       "residualSum": {
                         "type": "number",
-                        "exclusiveMinimum": true,
+                        "exclusiveMinimum": false,
                         "minimum": 0
                       },
                       "upgradePayment": {
