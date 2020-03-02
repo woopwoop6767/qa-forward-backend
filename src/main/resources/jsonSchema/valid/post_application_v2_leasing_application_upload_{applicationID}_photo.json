@@ -234,7 +234,10 @@
           }
         },
         "checkResultText": {
-          "type": "null"
+          "type": [
+            "null",
+            "string"
+          ]
         },
         "documentData": {
           "type": [
