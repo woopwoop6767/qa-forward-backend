@@ -64,6 +64,7 @@ public class test001CheckOrderIphone implements Specification, TextGenerator {
 
         leasingApplicationService
                 .postLeasingAppClientData(applicationID, authToken);
+
     }
 }
 

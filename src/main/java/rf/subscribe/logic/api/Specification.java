@@ -9,7 +9,6 @@ import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
 public interface Specification extends GetEnv {
-
     default RequestSpecification getRequestSpecification(String path) {
         return new RequestSpecBuilder()
                 .addFilter(new AllureRestAssured())

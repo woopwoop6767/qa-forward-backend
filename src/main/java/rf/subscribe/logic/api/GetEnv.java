@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 public interface GetEnv {
-
     default String getEnv(String property) {
         Properties properties = new Properties();
         try {

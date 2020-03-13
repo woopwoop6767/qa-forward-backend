@@ -125,7 +125,7 @@ public class LeasingApplicationService extends BodyForTest implements Specificat
                 .header("authorization", "Bearer " + authToken)
                 .body(getBodyForClientData())
                 .post()
-                .then()
+                .then().log().all()
                 .spec(getResponseSpecification(false))
                 .body(matchesJsonSchema(new File("src/main/resources/jsonSchema/valid/post_application_v2_leasing_application_{applicationID}_client_data.json")))
                 .extract().body().as(ClientDataResponse.class)

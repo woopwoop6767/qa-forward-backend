@@ -16,7 +16,7 @@ public class UploadPhotoService extends BodyForTest implements Specification {
 
 
     private HashMap getBodyValidPassport() {
-        return getHashMapImageEncoder("PASSPORT_RECOGNIZE", "src/main/resources/pass.jpeg");
+        return getHashMapImageEncoder("PASSPORT_RECOGNIZE", "src/main/resources/passport.png");
     }
 
     private HashMap getBodyPicture() {
@@ -24,7 +24,7 @@ public class UploadPhotoService extends BodyForTest implements Specification {
     }
 
     private HashMap getBodySelfie() {
-        return getHashMapImageEncoder("SELFIE", "src/main/resources/pass.jpeg");
+        return getHashMapImageEncoder("SELFIE", "src/main/resources/self.jpeg");
     }
 
 
